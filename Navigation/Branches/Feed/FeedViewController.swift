@@ -87,6 +87,16 @@ class FeedViewController: UIViewController {
         return button
     }()
     
+    private lazy var feedButton3: CustomButton = {
+        let button = CustomButton(
+            title: "Open map",
+            titleHighlighted: "Map opening...",
+            titleColor: .red,
+            titleHighlightedColor: .lightGray,
+            tapAction: { [weak self] in self?.tapFeedButton3() })
+        return button
+    }()
+    
     //MARK: - INITs
     init(viewModel: FeedViewModel) {
         self.viewModel = viewModel
@@ -128,9 +138,13 @@ class FeedViewController: UIViewController {
 //        viewModel.load(to: .info)
     }
     
+    private func tapFeedButton3() {
+        viewModel.load(to: .map)
+    }
+    
     private func showItems() {
         [headline, guessTextField, checkGuessButton, feedStackView].forEach{ view.addSubview($0) }
-        [feedButton0, feedButton1, feedButton2].forEach { feedStackView.addArrangedSubview($0) }
+        [feedButton0, feedButton1, feedButton2, feedButton3].forEach { feedStackView.addArrangedSubview($0) }
 
         NSLayoutConstraint.activate([
             //заголовок проверки значения

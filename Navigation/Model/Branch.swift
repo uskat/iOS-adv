@@ -18,6 +18,7 @@ struct Branch {
             case feed
             case post
             case info
+            case map
         }
         
         enum ProfileBranch: CoordinatorsEnumProtocol {
