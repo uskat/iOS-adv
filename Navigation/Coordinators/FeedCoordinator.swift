@@ -49,6 +49,9 @@ final class FeedCoordinator: CoordinatorProtocol {
         case .info as Branch.BranchName.FeedBranch:
             let view = InfoViewController()
             (branch?.view as? UINavigationController)?.present(view, animated: true)
+        case .map as Branch.BranchName.FeedBranch:
+            let view = MapViewController()
+            (branch?.view as? UINavigationController)?.pushViewController(view, animated: true)
         default:
             return
         }
