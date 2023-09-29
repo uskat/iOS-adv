@@ -47,8 +47,8 @@ class ProfileHeaderView: UIView {
     
     private lazy var mainButton: CustomButton = {
         let button = CustomButton(
-            title: "Set status",
-            titleHighlighted: "Status is being recorded",
+            title: NSLocalizedString("profile.setStatusN", comment: ""),
+            titleHighlighted: NSLocalizedString("profile.setStatusH", comment: ""),
             tapAction: { [weak self] in self?.tapMainButton() })
         button.layer.cornerRadius = 4
         button.layer.shadowOffset = CGSize(width: 4, height: 4)
@@ -72,7 +72,7 @@ class ProfileHeaderView: UIView {
         let status = UITextField()
         status.translatesAutoresizingMaskIntoConstraints = false
         status.font = UIFont.systemFont(ofSize: 15, weight: .regular)
-        status.placeholder = "Type new status"          ///текстовая подсказка в поле textField
+        status.placeholder = NSLocalizedString("profile.typeStatus", comment: "")          ///текстовая подсказка в поле textField
         status.adjustsFontSizeToFitWidth = true         ///уменьшение шрифта, если введенный текст не помещается
         status.minimumFontSize = 10                     ///до какого значения уменьшается шрифт
         status.tag = 3

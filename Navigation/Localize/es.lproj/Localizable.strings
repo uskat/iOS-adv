@@ -1,0 +1,46 @@
+/* 
+  Localizable.strings
+  Navigation
+
+  Created by Diego Abramoff on 28.09.23.
+  
+*/
+
+"feed.inputPassLabel" = "Ingrese la contraseña (contraseña correcta: 111)";
+"feed.inputPassPlaceholder" = "Ingrese la contraseña";
+"feed.toGuessButtonN" = "Adivina";
+"feed.toGuessButtonH" = "Intentando...";
+"feed.toInfoVCButtonN" = "Ir a InfoViewVC";
+"feed.toInfoVCButtonH" = "Se abre InfoViewVC...";
+"feed.toListOfVideoN" = "Lista de vídeos";
+"feed.toListOfVideoH" = "Se abre la lista de vídeos...";
+"feed.toVideoPlayerButtonN" = "Abrir reproductor de vídeo";
+"feed.toVideoPlayerButtonH" = "Se abre el reproductor de vídeo...";
+"feed.toMapButtonN" = "Abrir mapa";
+"feed.toMapButtonH" = "El mapa se abre...";
+"post.barButton" = "Información...";
+"info.runAwayButton" = "¡EJECUTAR!";
+"info.allBadAlert" = "¡Oh, no! Todo se ha ido..."; //"¡Oh no! Todo se ha ido..."
+"info.allHandsAlert" = "¡Todos manos a la obra!"; //"¡Todas las manos en el mazo!"
+"info.polundraAlert" = "¡Polundra!"; //"¡Polundra!"
+"info.allClearAlert" = "¡Cuelgue! Falsa alarma"; //"¡Cuelga! Falsa alarma"
+"info.orbitalPeriod" = "Período orbital de Tatooine:";
+"info.días" = "días";
+"info.listOfResidents" = "Lista de residentes de Tatooine:";
+"cancel" = "Cancelar";
+
+"post" = "Mensaje";
+"feed" = "Alimentar";
+"profile" = "Perfil";
+"favorites" = "Favoritos";
+
+"signin" = "Iniciar sesión";
+"signup" = "Registrarse";
+"login" = "Acceso";
+"pass" = "Contraseña";
+"name" = "Nombre";
+
+"profile.typeStatus" = "escriba nuevo estado";
+"profile.photos" = "Fotos";
+"profile.setStatusN" = "Establecer estado";
+"profile.setStatusH" = "Se está registrando el estado";

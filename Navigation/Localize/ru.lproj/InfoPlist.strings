@@ -1,0 +1,10 @@
+/* 
+  InfoPlist.strings
+  Navigation
+
+  Created by Diego Abramoff on 29.09.23.
+  
+*/
+
+"NSLocationWhenInUseUsageDescription" = "Для корректной работы функции геолокации требуется разрешить определение местоположения устройства";
+"NSLocationUsageDescription" = "Для корректной работы функции геолокации требуется разрешить определение местоположения устройства";

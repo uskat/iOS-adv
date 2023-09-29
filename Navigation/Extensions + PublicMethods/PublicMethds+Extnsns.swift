@@ -6,10 +6,10 @@ import Foundation
 //MARK: ===================================  LOGIN  ===================================
 func placeHolder(_ textField: UITextField) -> String {
     switch textField.tag {
-    case 1: return "Login"
-    case 2: return "Password"
-    case 3: return "Type new status"
-    case 4: return "Name"
+    case 1: return NSLocalizedString("login", comment: "")
+    case 2: return NSLocalizedString("pass", comment: "")
+    case 3: return NSLocalizedString("profile.typeStatus", comment: "")
+    case 4: return NSLocalizedString("name", comment: "")
     default: return "Type something..."
     }
 }

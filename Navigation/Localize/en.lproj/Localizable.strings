@@ -1,0 +1,46 @@
+/* 
+  Localizable.strings
+  Navigation
+
+  Created by Diego Abramoff on 28.09.23.
+  
+*/
+
+"feed.inputPassLabel" = "Input password to check (right pass: 111)";
+"feed.inputPassPlaceholder" = "Input password";
+"feed.toGuessButtonN" = "To guess";
+"feed.toGuessButtonH" = "Let's try...";
+"feed.toInfoVCButtonN" = "To InfoViewVC";
+"feed.toInfoVCButtonH" = "InfoViewVC opening...";
+"feed.toListOfVideoN" = "List of videos";
+"feed.toListOfVideoH" = "List of videos opening...";
+"feed.toVideoPlayerButtonN" = "Open videoplayer";
+"feed.toVideoPlayerButtonH" = "Videoplayer opening...";
+"feed.toMapButtonN" = "Open map";
+"feed.toMapButtonH" = "Map opening...";
+"post.barButton" = "Info...";
+"info.runAwayButton" = "RUUUUUUN AWAAAAAY !!!!!!";
+"info.allBadAlert" = "Oh, no! All bad..."; //"О, нет! Все пропало..."
+"info.allHandsAlert" = "All hands on deck!"; //"Свистать всех наверх!"
+"info.polundraAlert" = "Stand from under!"; //"Полундра!"
+"info.allClearAlert" = "All-clear! False alarm!"; //"Отбой! Ложная тревога"
+"info.orbitalPeriod" = "ORBITAL PERIOD of Tatuin:";
+"info.days" = "days";
+"info.listOfResidents" = "List of residents of Tatuin:";
+"cancel" = "Cancel";
+
+"post" = "Post";
+"feed" = "Feed";
+"profile" = "Profile";
+"favorites" = "Favorites";
+
+"signin" = "Sign in";
+"signup" = "Sign up";
+"login" = "Login";
+"pass" = "Password";
+"name" = "Name";
+
+"profile.typeStatus" = "Type new status";
+"profile.photos" = "Photos";
+"profile.setStatusN" = "Set status";
+"profile.setStatusH" = "Status is being recorded";

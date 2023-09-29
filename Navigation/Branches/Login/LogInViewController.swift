@@ -47,7 +47,7 @@ class LogInViewController: UIViewController {
     private lazy var loginTextField: UITextField = {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        $0.placeholder = "Login"
+        $0.placeholder = NSLocalizedString("login", comment: "")
         $0.tag = 1
         $0.delegate = self
         $0.tintColor = UIColor.AccentColor.normal                           ///цвет курсора
@@ -75,7 +75,7 @@ class LogInViewController: UIViewController {
     private lazy var passTextField: UITextField = {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        $0.placeholder = "Password"
+        $0.placeholder = NSLocalizedString("pass", comment: "")
         $0.tag = 2
         $0.delegate = self
         $0.tintColor = UIColor.AccentColor.normal                           ///цвет курсора
@@ -94,7 +94,7 @@ class LogInViewController: UIViewController {
 
     private lazy var loginButton: CustomButton = {
         let button = CustomButton(
-            title: "Sign in",
+            title: NSLocalizedString("signin", comment: ""),
             background: UIColor.AccentColor.normal,
             tapAction:  { [weak self] in self?.tapLoginButton() })
         button.layer.cornerRadius = 10
@@ -107,7 +107,7 @@ class LogInViewController: UIViewController {
     
     private lazy var signUpButton: CustomButton = {
         let button = CustomButton(
-            title: "Sign up",
+            title: NSLocalizedString("signup", comment: ""),
             titleColor: UIColor.AccentColor.normal,
             background: UIColor.systemGray6,
             tapAction:  { [weak self] in self?.tapSignUpButton() })
