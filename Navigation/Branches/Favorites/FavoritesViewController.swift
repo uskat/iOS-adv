@@ -11,7 +11,7 @@ class FavoritesViewController: UIViewController {
 //MARK: - ITEMs
     private lazy var tableView: UITableView = {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.backgroundColor = .clear
+        $0.backgroundColor = UIColor.createColor(lightMode: .clear, darkMode: .systemGray6)
         $0.dataSource = self
         $0.delegate = self
         $0.register(ProfileTableViewCell.self, forCellReuseIdentifier: ProfileTableViewCell.identifier)
@@ -31,7 +31,7 @@ class FavoritesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = NSLocalizedString("favorites", comment: "")
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor.createColor(lightMode: .white, darkMode: .black)
         showBarButton()
         setupUI()
         self.fetchPosts()
