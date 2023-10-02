@@ -43,11 +43,11 @@ extension Branch.BranchName {
     var tabBatItem: UITabBarItem {
         switch self {
             case .feed:
-                return UITabBarItem(title: "Feed", image: UIImage(systemName: "rectangle.grid.2x2"), tag: 0)
+                return UITabBarItem(title: NSLocalizedString("feed", comment: ""), image: UIImage(systemName: "rectangle.grid.2x2"), tag: 0)
             case .profile:
-                return UITabBarItem(title: "Profile", image: UIImage(systemName: "person.crop.circle"), tag: 1)
+                return UITabBarItem(title: NSLocalizedString("profile", comment: ""), image: UIImage(systemName: "person.crop.circle"), tag: 1)
             case .favorites:
-                return UITabBarItem(title: "Favorites", image: UIImage(systemName: "heart.text.square.fill"), tag: 2)
+                return UITabBarItem(title: NSLocalizedString("favorites", comment: ""), image: UIImage(systemName: "heart.text.square.fill"), tag: 2)
         }
     }
 }

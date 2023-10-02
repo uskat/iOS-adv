@@ -63,6 +63,8 @@
 		B69758CB2A37940800279646 /* Videos.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69758CA2A37940800279646 /* Videos.swift */; };
 		B69758CD2A37B86100279646 /* ashoka.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = B69758CC2A37B86100279646 /* ashoka.mp4 */; };
 		B69758CF2A37B86C00279646 /* clonewars.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = B69758CE2A37B86C00279646 /* clonewars.mp4 */; };
+		B69F5D552AC64D0900EED8C1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B69F5D572AC64D0900EED8C1 /* InfoPlist.strings */; };
+		B69F5D5A2AC65B1E00EED8C1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B69F5D5C2AC65B1E00EED8C1 /* Localizable.strings */; };
 		B6AF515F2ABD3FC600282B31 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6AF515E2ABD3FC600282B31 /* MapViewController.swift */; };
 		B6B92F662A64E3140054805A /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B92F652A64E3140054805A /* SignUpViewController.swift */; };
 		B6B92F6A2A661D8A0054805A /* FirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B92F692A661D8A0054805A /* FirebaseService.swift */; };
@@ -178,6 +180,15 @@
 		B69758CA2A37940800279646 /* Videos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Videos.swift; sourceTree = "<group>"; };
 		B69758CC2A37B86100279646 /* ashoka.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = ashoka.mp4; sourceTree = "<group>"; };
 		B69758CE2A37B86C00279646 /* clonewars.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = clonewars.mp4; sourceTree = "<group>"; };
+		B69F5D4E2AC63FB300EED8C1 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		B69F5D4F2AC63FB800EED8C1 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		B69F5D522AC649A800EED8C1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		B69F5D562AC64D0900EED8C1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		B69F5D582AC64D0D00EED8C1 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		B69F5D592AC64D0E00EED8C1 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		B69F5D5B2AC65B1E00EED8C1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		B69F5D5D2AC65B1F00EED8C1 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		B69F5D5E2AC65B2000EED8C1 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B6AF515E2ABD3FC600282B31 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		B6B92F652A64E3140054805A /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		B6B92F692A661D8A0054805A /* FirebaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseService.swift; sourceTree = "<group>"; };
@@ -355,6 +366,7 @@
 			children = (
 				B6F447BB2A62145A00AB7E57 /* GoogleService-Info.plist */,
 				08F0949F2825E957003DA7CC /* Info.plist */,
+				B62AED642AC6188E0079C625 /* Localize */,
 				B69758C32A375D1100279646 /* Resources */,
 				0860055529512B4800B0C954 /* Application */,
 				B6F4477D2A52262D00AB7E57 /* Network */,
@@ -384,6 +396,15 @@
 				B61025D92A8275E000CB1461 /* CoreDataService.swift */,
 			);
 			path = CoreData;
+			sourceTree = "<group>";
+		};
+		B62AED642AC6188E0079C625 /* Localize */ = {
+			isa = PBXGroup;
+			children = (
+				B69F5D5C2AC65B1E00EED8C1 /* Localizable.strings */,
+				B69F5D572AC64D0900EED8C1 /* InfoPlist.strings */,
+			);
+			path = Localize;
 			sourceTree = "<group>";
 		};
 		B69758C32A375D1100279646 /* Resources */ = {
@@ -569,6 +590,8 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
+				es,
 			);
 			mainGroup = 08F094852825E955003DA7CC;
 			packageReferences = (
@@ -608,8 +631,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				B69758CD2A37B86100279646 /* ashoka.mp4 in Resources */,
+				B69F5D552AC64D0900EED8C1 /* InfoPlist.strings in Resources */,
 				B69758C52A375D3400279646 /* GoT.mp4 in Resources */,
 				08F0949E2825E957003DA7CC /* LaunchScreen.storyboard in Resources */,
+				B69F5D5A2AC65B1E00EED8C1 /* Localizable.strings in Resources */,
 				B69758CF2A37B86C00279646 /* clonewars.mp4 in Resources */,
 				08F0949B2825E957003DA7CC /* Assets.xcassets in Resources */,
 				B6F447BC2A62145A00AB7E57 /* GoogleService-Info.plist in Resources */,
@@ -724,8 +749,31 @@
 			isa = PBXVariantGroup;
 			children = (
 				08F0949D2825E957003DA7CC /* Base */,
+				B69F5D4E2AC63FB300EED8C1 /* ru */,
+				B69F5D4F2AC63FB800EED8C1 /* es */,
+				B69F5D522AC649A800EED8C1 /* en */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		B69F5D572AC64D0900EED8C1 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B69F5D562AC64D0900EED8C1 /* en */,
+				B69F5D582AC64D0D00EED8C1 /* ru */,
+				B69F5D592AC64D0E00EED8C1 /* es */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		B69F5D5C2AC65B1E00EED8C1 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B69F5D5B2AC65B1E00EED8C1 /* en */,
+				B69F5D5D2AC65B1F00EED8C1 /* ru */,
+				B69F5D5E2AC65B2000EED8C1 /* es */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -831,6 +879,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -892,6 +941,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -949,11 +999,15 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 9H5796GYSM;
+				DEVELOPMENT_TEAM = DKH259U287;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Navigation/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
+				INFOPLIST_KEY_NSLocationUsageDescription = "Your permission is required. This app needs your current location";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Permission requested. This app needs your current location";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIStatusBarHidden = NO;
@@ -967,6 +1021,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = Netology.Navigation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -979,11 +1034,15 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 9H5796GYSM;
+				DEVELOPMENT_TEAM = DKH259U287;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Navigation/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
+				INFOPLIST_KEY_NSLocationUsageDescription = "Your permission is required. This app needs your current location";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Permission requested. This app needs your current location";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIStatusBarHidden = NO;
@@ -997,6 +1056,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = Netology.Navigation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

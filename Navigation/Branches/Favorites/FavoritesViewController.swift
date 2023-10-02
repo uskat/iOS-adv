@@ -30,7 +30,7 @@ class FavoritesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Favorites"
+        title = NSLocalizedString("favorites", comment: "")
         view.backgroundColor = .white
         showBarButton()
         setupUI()

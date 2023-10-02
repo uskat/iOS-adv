@@ -55,12 +55,13 @@ class PostViewController: UIViewController, WKNavigationDelegate, WKUIDelegate {
         if let post = post {
             title = post.title
         }
+        navigationController?.navigationBar.tintColor = .black
     }
 
 
 //MARK: - METHODs
     private func showBarButton() {
-        let button = UIBarButtonItem(title: "Info...", style: .plain, target: self, action: #selector(tapAction))
+        let button = UIBarButtonItem(title: NSLocalizedString("post.barButton", comment: ""), style: .plain, target: self, action: #selector(tapAction))
         navigationItem.rightBarButtonItem = button
     }
     

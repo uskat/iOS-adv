@@ -1,0 +1,46 @@
+/* 
+  Localizable.strings
+  Navigation
+
+  Created by Diego Abramoff on 28.09.23.
+  
+*/
+
+"feed.inputPassLabel" = "Введите пароль (правильный пароль: 111)";
+"feed.inputPassPlaceholder" = "Введите пароль";
+"feed.toGuessButtonN" = "Предположим";
+"feed.toGuessButtonH" = "Пробуем...";
+"feed.toInfoVCButtonN" = "Переход в InfoViewVC";
+"feed.toInfoVCButtonH" = "InfoViewVC открывается...";
+"feed.toListOfVideoN" = "Список видео";
+"feed.toListOfVideoH" = "Список видео открывается...";
+"feed.toVideoPlayerButtonN" = "Открыть видеоплейер";
+"feed.toVideoPlayerButtonH" = "Видеоплейер открывается...";
+"feed.toMapButtonN" = "Открыть карту";
+"feed.toMapButtonH" = "Карта открывается...";
+"post.barButton" = "Инфо...";
+"info.runAwayButton" = "БЕЖИИИИМ !!!!!!";
+"info.allBadAlert" = "О, нет! Все пропало..."; //"О, нет! Все пропало..."
+"info.allHandsAlert" = "Свистать всех наверх!"; //"Свистать всех наверх!"
+"info.polundraAlert" = "Полундра!"; //"Полундра!"
+"info.allClearAlert" = "Отбой! Ложная тревога"; //"Отбой! Ложная тревога"
+"info.orbitalPeriod" = "Период обращения Татуина:";
+"info.days" = "дней";
+"info.listOfResidents" = "Список жителей Татуина:";
+"cancel" = "Отмена";
+
+"post" = "Сообщение";
+"feed" = "Лента";
+"profile" = "Профиль";
+"favorites" = "Избранное";
+
+"signin" = "Вход";
+"signup" = "Регистрация";
+"login" = "Логин";
+"pass" = "Пароль";
+"name" = "Имя";
+
+"profile.typeStatus" = "Введите статус";
+"profile.photos" = "Фотографии";
+"profile.setStatusN" = "Установить статус";
+"profile.setStatusH" = "Статус установлен";

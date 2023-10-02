@@ -9,7 +9,7 @@ class PhotosTableViewCell: UITableViewCell {
     private let cellTitleName: UILabel = {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.font = UIFont.systemFont(ofSize: 24, weight: .bold)
-        $0.text = "Photos"
+        $0.text = NSLocalizedString("profile.photos", comment: "") 
         return $0
     }(UILabel())
     

@@ -1,0 +1,10 @@
+/* 
+  InfoPlist.strings
+  Navigation
+
+  Created by Diego Abramoff on 29.09.23.
+  
+*/
+
+"NSLocationWhenInUseUsageDescription" = "Permission requested. This app needs your current location";
+"NSLocationUsageDescription" = "Your permission is required. This app needs your current location";

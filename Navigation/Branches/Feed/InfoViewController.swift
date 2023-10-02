@@ -43,7 +43,7 @@ class InfoViewController: UIViewController {
     
     private lazy var infoButton: CustomButton = {
         let button = CustomButton(
-            title: "RUUUUUUN AWAAAAAY !!!!!!",
+            title: NSLocalizedString("info.runAwayButton", comment: ""),
             tapAction: { [weak self] in self?.tapInfoButton() })
         button.layer.cornerRadius = 4
         return button
@@ -61,13 +61,13 @@ class InfoViewController: UIViewController {
 
 //MARK: - METHODs
     @objc private func tapInfoButton() {
-        let alert = UIAlertController(title: "О, нет! Все пропало...", message: "Свистать всех наверх!", preferredStyle: .alert)
-        let ok = UIAlertAction(title: "Полундра!", style: .default) {
+        let alert = UIAlertController(title: NSLocalizedString("info.allBadAlert", comment: ""), message: NSLocalizedString("info.allHandsAlert", comment: ""), preferredStyle: .alert)
+        let ok = UIAlertAction(title: NSLocalizedString("info.polundraAlert", comment: ""), style: .default) {
             _ in self.dismiss(animated: true)
             print("Ок")
         }
-        let cancel = UIAlertAction(title: "Отбой! Ложная тревога", style: .destructive) {
-            _ in print("Отмена")
+        let cancel = UIAlertAction(title: NSLocalizedString("info.allClearAlert", comment: ""), style: .destructive) {
+            _ in print(NSLocalizedString("cancel", comment: ""))
         }
         alert.addAction(ok)
         alert.addAction(cancel)
@@ -109,7 +109,7 @@ class InfoViewController: UIViewController {
                 do {
                     let planet = try JSONDecoder().decode(PlanetModel.self, from: data)
                     OperationQueue.main.addOperation { [weak self] in
-                        self?.jsonTask2Label.text = ["ORBITAL PERIOD of Tatuin:", planet.orbitalPeriod, "days"]
+                        self?.jsonTask2Label.text = [NSLocalizedString("info.orbitalPeriod", comment: ""), planet.orbitalPeriod, NSLocalizedString("info.days", comment: "")]
                             .compactMap({ $0 })
                             .joined(separator: " ")
                     }
@@ -125,7 +125,7 @@ class InfoViewController: UIViewController {
     func decodeJSON2() {
         guard let url = URL(string: "https://swapi.dev/api/planets/1") else { return }
         var array: [String] = []
-        var listOfResidents: [String] = ["List of residents of Tatuin:"]
+        var listOfResidents: [String] = [NSLocalizedString("info.listOfResidents", comment: "")]
 
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
             guard let data = data else { return }

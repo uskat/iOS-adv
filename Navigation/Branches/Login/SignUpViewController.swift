@@ -45,7 +45,7 @@ class SignUpViewController: UIViewController {
         $0.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         $0.layer.borderColor = UIColor.lightGray.cgColor
         $0.layer.borderWidth = 0.5
-        $0.placeholder = "Login"
+        $0.placeholder = NSLocalizedString("login", comment: "")
         $0.tag = 1
         $0.tintColor = UIColor.AccentColor.normal                           ///цвет курсора
         $0.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0)  ///сдвиг курсора на 5пт в textField (для красоты)
@@ -64,7 +64,7 @@ class SignUpViewController: UIViewController {
     private lazy var passTextField: UITextField = {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        $0.placeholder = "Password"
+        $0.placeholder = NSLocalizedString("pass", comment: "")
         $0.tag = 2
         $0.tintColor = UIColor.AccentColor.normal                           ///цвет курсора
         $0.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0)  ///сдвиг курсора на 5пт в textField (для красоты)
@@ -85,7 +85,7 @@ class SignUpViewController: UIViewController {
         $0.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         $0.layer.borderColor = UIColor.lightGray.cgColor
         $0.layer.borderWidth = 0.5
-        $0.placeholder = "Name"
+        $0.placeholder = NSLocalizedString("name", comment: "")
         $0.tag = 4
 //            $0.delegate = self
         $0.tintColor = UIColor.AccentColor.normal                           ///цвет курсора
@@ -96,7 +96,7 @@ class SignUpViewController: UIViewController {
     
     private lazy var signUpButton: CustomButton = {
         let button = CustomButton(
-            title: "Sign up",
+            title: NSLocalizedString("signup", comment: ""),
             background: UIColor.AccentColor.normal,
             tapAction:  { [weak self] in self?.tapSignUpButton() })
         button.layer.cornerRadius = 10

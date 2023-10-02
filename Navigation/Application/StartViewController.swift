@@ -22,6 +22,7 @@ class StartViewController: UIViewController {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.isEditable = false
         $0.backgroundColor = .clear
+        $0.textColor = .black
         return $0
     }(UITextView())
     
@@ -39,23 +40,25 @@ class StartViewController: UIViewController {
         let firebaseService = FirebaseService.shared
         let firestoreManager = FirestoreManager.shared
         let userService = CurrentUserService.shared
-        
+
         if firebaseService.isAuthorized {
             txt.text += "START Auth = \(firebaseService.isAuthorized)\n" ///Отладка запуска, если пользователь остался залогинен
             
             if let login = firebaseService.getCurrentUser()?.email {
                 firestoreManager.getData(for: login) { profile in
                     userService.userData = profile
-                    self.txt.text += "START profile = \(userService.userData)\n"///Отладка запуска, если пользователь остался залогинен
+                    self.txt.text += "START profile = \(String(describing: userService.userData))\n"///Отладка запуска, если пользователь остался залогинен
 
                 }
             }
-            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3), execute: {
-                self.txt.text += "NEXT profile = \(userService.userData?.name)\n"///Отладка запуска, если пользователь остался залогинен
+            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(7), execute: {
+                self.txt.text += "NEXT profile = \(String(describing: userService.userData?.name))\n"///Отладка запуска, если пользователь остался залогинен
                 if userService.userData?.name == nil {
                     try? firebaseService.signOut()
                 }
             })
+        } else {
+            txt.text += "START Auth = \(firebaseService.isAuthorized)\n" ///Отладка запуска, если пользователь остался залогинен
         }
     }
     
