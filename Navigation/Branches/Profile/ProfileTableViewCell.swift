@@ -19,6 +19,7 @@ class ProfileTableViewCell: UITableViewCell {
     let postName: UILabel = {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        $0.textColor = UIColor.createColor(lightMode: .black, darkMode: .systemGray)
         $0.numberOfLines = 2
         return $0
     }(UILabel())
@@ -26,7 +27,7 @@ class ProfileTableViewCell: UITableViewCell {
     let postDescription: UITextView = {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.font = UIFont.systemFont(ofSize: 14, weight: .regular)
-        $0.textColor = .systemGray
+        $0.textColor = UIColor.createColor(lightMode: .systemGray, darkMode: .systemGray2)
         $0.backgroundColor = .clear
         $0.isEditable = false
         $0.isSelectable = false
@@ -36,7 +37,7 @@ class ProfileTableViewCell: UITableViewCell {
 
     let postImage: UIImageView = {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.backgroundColor = .black
+        $0.backgroundColor = UIColor.createColor(lightMode: .black, darkMode: .systemGray6)
         $0.contentMode = .scaleAspectFit
         return $0
     }(UIImageView())
@@ -44,6 +45,7 @@ class ProfileTableViewCell: UITableViewCell {
     let likes: UILabel = {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.font = UIFont.systemFont(ofSize: 16, weight: .regular)
+        $0.textColor = UIColor.createColor(lightMode: .black, darkMode: .systemGray)
         $0.isUserInteractionEnabled = true
         return $0
     }(UILabel())
@@ -52,13 +54,14 @@ class ProfileTableViewCell: UITableViewCell {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.textAlignment = .right
         $0.font = UIFont.systemFont(ofSize: 16, weight: .regular)
+        $0.textColor = UIColor.createColor(lightMode: .black, darkMode: .systemGray)
         return $0
     }(UILabel())
     
     private var addedPostLabel: UILabel = {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.font = UIFont(name: "Papyrus", size: 24)
-        $0.textColor = UIColor.AccentColor.normal
+        $0.textColor = UIColor.createColor(lightMode: .AccentColor.normal, darkMode: .AccentColor.normal)
         $0.text = "Added to Favorites"
         $0.alpha = 0.0
         return $0

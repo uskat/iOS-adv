@@ -31,3 +31,13 @@ extension UIColor {
         static var disabled: UIColor { return UIColor(rgb: 0x4885CC, a: 0.8) }      ///не используется
     }
 }
+
+//
+extension UIColor {
+    static func createColor(lightMode: UIColor, darkMode: UIColor) -> UIColor {
+        guard #available(iOS 13.0, *) else { return lightMode }
+        return UIColor { traitCollection -> UIColor in
+            return traitCollection.userInterfaceStyle == .light ? lightMode : darkMode
+        }
+    }
+}

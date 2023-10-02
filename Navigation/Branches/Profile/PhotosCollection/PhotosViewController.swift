@@ -15,7 +15,7 @@ class PhotosViewController: UIViewController {
 //        let layout = UICollectionViewFlowLayout()
 //        let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.backgroundColor = .white
+        $0.backgroundColor = UIColor.createColor(lightMode: .black, darkMode: .systemGray6)
         $0.dataSource = self
         $0.delegate = self
         $0.register(PhotosCollectionViewCell.self, forCellWithReuseIdentifier: PhotosCollectionViewCell.identifier)
@@ -25,9 +25,9 @@ class PhotosViewController: UIViewController {
     private lazy var buttonX: UIButton = {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.layer.cornerRadius = 12
-        $0.backgroundColor = UIColor.AccentColor.normal //.systemGray
+        $0.backgroundColor = UIColor.createColor(lightMode: .AccentColor.normal, darkMode: .AccentColor.normal)
         $0.setImage(UIImage(systemName: "x.circle"), for: .normal)
-        $0.tintColor = .white
+        $0.tintColor = UIColor.createColor(lightMode: .black, darkMode: .lightGray)
         $0.alpha = 0.0
         $0.isHidden = true
         $0.addTarget(self, action: #selector(tapButtonX), for: .touchUpInside)

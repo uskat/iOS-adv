@@ -17,6 +17,7 @@ class DetailedPostViewController: UIViewController {
     let postName: UILabel = {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        $0.textColor = UIColor.createColor(lightMode: .black, darkMode: .systemGray)
         $0.numberOfLines = 2
         return $0
     }(UILabel())
@@ -24,14 +25,14 @@ class DetailedPostViewController: UIViewController {
     let postDescription: UILabel = {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.font = UIFont.systemFont(ofSize: 14, weight: .regular)
-        $0.textColor = .systemGray
+        $0.textColor = UIColor.createColor(lightMode: .black, darkMode: .systemGray2)
         $0.numberOfLines = 0
         return $0
     }(UILabel())
 
     let postImage: UIImageView = {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.backgroundColor = .black
+        $0.backgroundColor = UIColor.createColor(lightMode: .black, darkMode: .systemGray6)
         $0.contentMode = .scaleAspectFit
         return $0
     }(UIImageView())
@@ -39,6 +40,7 @@ class DetailedPostViewController: UIViewController {
     let likes: UILabel = {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.font = UIFont.systemFont(ofSize: 16, weight: .regular)
+        $0.textColor = UIColor.createColor(lightMode: .black, darkMode: .systemGray)
         $0.isUserInteractionEnabled = true
         return $0
     }(UILabel())
@@ -48,15 +50,16 @@ class DetailedPostViewController: UIViewController {
         $0.backgroundColor = .clear
         $0.textAlignment = .right
         $0.font = UIFont.systemFont(ofSize: 16, weight: .regular)
+        $0.textColor = UIColor.createColor(lightMode: .black, darkMode: .systemGray)
         return $0
     }(UILabel())
 
     private lazy var buttonX: UIButton = {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.layer.cornerRadius = 12
-        $0.backgroundColor = UIColor.AccentColor.normal
+        $0.backgroundColor = UIColor.createColor(lightMode: .AccentColor.normal, darkMode: .AccentColor.normal)
         $0.setImage(UIImage(systemName: "x.circle"), for: .normal)
-        $0.tintColor = .white
+        $0.tintColor = UIColor.createColor(lightMode: .white, darkMode: .lightGray)
         $0.addTarget(self, action: #selector(tapButtonX), for: .touchUpInside)
         return $0
     }(UIButton())
@@ -72,7 +75,7 @@ class DetailedPostViewController: UIViewController {
 //MARK: - INITs
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor.createColor(lightMode: .white, darkMode: .systemGray6)
         show()
         setupLikesGestures()
     }

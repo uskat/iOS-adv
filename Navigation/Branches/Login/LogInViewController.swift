@@ -14,7 +14,7 @@ class LogInViewController: UIViewController {
 //MARK: - ITEMs
     private let scrollLoginView: UIScrollView = {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.backgroundColor = .white
+        $0.backgroundColor = UIColor.createColor(lightMode: .white, darkMode: .systemGray5)
         return $0
     }(UIScrollView())
     
@@ -38,8 +38,8 @@ class LogInViewController: UIViewController {
         $0.spacing = 0.5
         $0.layer.cornerRadius = 10
         $0.layer.borderWidth = 0.5
-        $0.layer.borderColor = UIColor.lightGray.cgColor
-        $0.backgroundColor = .systemGray6
+        $0.layer.borderColor = UIColor.createColor(lightMode: .lightGray, darkMode: .lightGray).cgColor
+        $0.backgroundColor = UIColor.createColor(lightMode: .systemGray6, darkMode: .systemGray6)
         $0.clipsToBounds = true
         return $0
     }(UIStackView())
@@ -50,25 +50,25 @@ class LogInViewController: UIViewController {
         $0.placeholder = NSLocalizedString("login", comment: "")
         $0.tag = 1
         $0.delegate = self
-        $0.tintColor = UIColor.AccentColor.normal                           ///цвет курсора
+        $0.tintColor = UIColor.createColor(lightMode: .AccentColor.normal, darkMode: .AccentColor.normal)                           ///цвет курсора
         $0.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0)  ///сдвиг курсора на 5пт в textField (для красоты)
         $0.autocapitalizationType = .none
-        $0.backgroundColor = .systemGray6
+        $0.backgroundColor = UIColor.createColor(lightMode: .systemGray6, darkMode: .systemGray4)
         return $0
     }(UITextField())
    
     private lazy var loginAlert: UILabel = {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.textColor = .systemRed
+        $0.textColor = UIColor.createColor(lightMode: .systemRed, darkMode: .systemRed)
         $0.font = UIFont.systemFont(ofSize: 13, weight: .light)
         return $0
     }(UILabel())
     
     private lazy var loginView: UIView = {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.layer.borderColor = UIColor.lightGray.cgColor
+        $0.layer.borderColor = UIColor.createColor(lightMode: .lightGray, darkMode: .lightGray).cgColor
         $0.layer.borderWidth = 0.5
-        $0.backgroundColor = .systemGray6
+//        $0.backgroundColor = UIColor.createColor(lightMode: .systemGray6, darkMode: .systemGray6)
         return $0
     }(UIView())
     
@@ -78,16 +78,16 @@ class LogInViewController: UIViewController {
         $0.placeholder = NSLocalizedString("pass", comment: "")
         $0.tag = 2
         $0.delegate = self
-        $0.tintColor = UIColor.AccentColor.normal                           ///цвет курсора
+        $0.tintColor = UIColor.createColor(lightMode: .AccentColor.normal, darkMode: .AccentColor.normal)                           ///цвет курсора
         $0.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0)  ///сдвиг курсора на 5пт в textField (для красоты)
-        $0.backgroundColor = .systemGray6
+        $0.backgroundColor = UIColor.createColor(lightMode: .systemGray6, darkMode: .systemGray4)
         $0.isSecureTextEntry = true
         return $0
     }(UITextField())
     
     private lazy var passAlert: UILabel = {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.textColor = .systemRed
+        $0.textColor = UIColor.createColor(lightMode: .systemRed, darkMode: .systemRed)
         $0.font = UIFont.systemFont(ofSize: 13, weight: .light)
         return $0
     }(UILabel())
@@ -95,12 +95,12 @@ class LogInViewController: UIViewController {
     private lazy var loginButton: CustomButton = {
         let button = CustomButton(
             title: NSLocalizedString("signin", comment: ""),
-            background: UIColor.AccentColor.normal,
+            background: UIColor.createColor(lightMode: .AccentColor.normal, darkMode: .AccentColor.normal),
             tapAction:  { [weak self] in self?.tapLoginButton() })
         button.layer.cornerRadius = 10
         button.layer.shadowOffset = CGSize(width: 4, height: 4)
         button.layer.shadowRadius = 4
-        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowColor = UIColor.createColor(lightMode: .black, darkMode: .black).cgColor
         button.layer.shadowOpacity = 0.7
         return button
     }()
@@ -108,15 +108,15 @@ class LogInViewController: UIViewController {
     private lazy var signUpButton: CustomButton = {
         let button = CustomButton(
             title: NSLocalizedString("signup", comment: ""),
-            titleColor: UIColor.AccentColor.normal,
-            background: UIColor.systemGray6,
+            titleColor: UIColor.createColor(lightMode: .AccentColor.normal, darkMode: .AccentColor.normal),
+            background: UIColor.createColor(lightMode: .systemGray6, darkMode: .systemGray6),
             tapAction:  { [weak self] in self?.tapSignUpButton() })
         button.layer.cornerRadius = 10
-        button.layer.borderColor = UIColor.AccentColor.normal.cgColor
+        button.layer.borderColor = UIColor.createColor(lightMode: .AccentColor.normal, darkMode: .AccentColor.normal).cgColor
         button.layer.borderWidth = 1
         button.layer.shadowOffset = CGSize(width: 4, height: 4)
         button.layer.shadowRadius = 4
-        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowColor = UIColor.createColor(lightMode: .black, darkMode: .black).cgColor
         button.layer.shadowOpacity = 0.7
         return button
     }()
@@ -124,7 +124,7 @@ class LogInViewController: UIViewController {
     var errorsLabel: UILabel = {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.font = UIFont.systemFont(ofSize: 10, weight: .regular)
-        $0.textColor = .systemRed
+        $0.textColor = UIColor.createColor(lightMode: .systemRed, darkMode: .systemRed)
         $0.alpha = 0.30
         $0.numberOfLines = 9
         return $0
@@ -133,7 +133,7 @@ class LogInViewController: UIViewController {
     private lazy var activitySign: UIActivityIndicatorView = {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.style = .large
-        $0.color = UIColor.AccentColor.normal
+        $0.color = UIColor.createColor(lightMode: .AccentColor.normal, darkMode: .AccentColor.normal)
         return $0
     }(UIActivityIndicatorView())
     
@@ -150,7 +150,7 @@ class LogInViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor.createColor(lightMode: .white, darkMode: .black)
         showLoginItems()
         view.addTapGestureToHideKeyboard() ///скрываем клавиатуру при нажатии вне поля textField
         #if DEBUG

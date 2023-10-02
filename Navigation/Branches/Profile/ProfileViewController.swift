@@ -24,7 +24,7 @@ class ProfileViewController: UIViewController {
 //MARK: - ITEMs
     private lazy var tableView: UITableView = {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.backgroundColor = .clear
+        $0.backgroundColor = UIColor.createColor(lightMode: .clear, darkMode: .systemGray6)
         $0.dataSource = self
         $0.delegate = self
         $0.register(ProfileTableViewCell.self, forCellReuseIdentifier: ProfileTableViewCell.identifier)
@@ -58,7 +58,7 @@ class ProfileViewController: UIViewController {
         #if DEBUG
             view.backgroundColor = .systemYellow
         #else
-            view.backgroundColor = .white
+            view.backgroundColor = UIColor.createColor(lightMode: .white, darkMode: .black)
         #endif
     }
     

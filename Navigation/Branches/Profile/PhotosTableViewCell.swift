@@ -10,6 +10,7 @@ class PhotosTableViewCell: UITableViewCell {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.font = UIFont.systemFont(ofSize: 24, weight: .bold)
         $0.text = NSLocalizedString("profile.photos", comment: "") 
+        $0.textColor = UIColor.createColor(lightMode: .black, darkMode: .systemGray)
         return $0
     }(UILabel())
     
@@ -37,7 +38,7 @@ class PhotosTableViewCell: UITableViewCell {
             let onePhoto: UIImageView = {
                 $0.translatesAutoresizingMaskIntoConstraints = false
                 $0.contentMode = .scaleAspectFill
-                $0.backgroundColor = .black
+                $0.backgroundColor = UIColor.createColor(lightMode: .black, darkMode: .systemGray6)
                 $0.layer.cornerRadius = 6
                 $0.clipsToBounds = true
 //                $0.image = photosVC.photos[index]

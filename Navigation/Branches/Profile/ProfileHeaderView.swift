@@ -30,7 +30,7 @@ class ProfileHeaderView: UIView {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.layer.cornerRadius = sizeProfileImage / 2
         imageView.layer.borderWidth = 3
-        imageView.layer.borderColor = UIColor.white.cgColor
+        imageView.layer.borderColor = UIColor.createColor(lightMode: .white, darkMode: .systemGray).cgColor
         imageView.contentMode = .scaleAspectFill        ///полное заполнение
         imageView.clipsToBounds = true
         imageView.isUserInteractionEnabled = true
@@ -41,19 +41,20 @@ class ProfileHeaderView: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
-        label.backgroundColor = UIColor(displayP3Red: 0.0, green: 0.0, blue: 0.0, alpha: 0.0)
+        label.textColor = UIColor.createColor(lightMode: .black, darkMode: .systemGray)
+//        label.backgroundColor = UIColor(displayP3Red: 0.0, green: 0.0, blue: 0.0, alpha: 0.0)
         return label
     }()
     
     private lazy var mainButton: CustomButton = {
         let button = CustomButton(
             title: NSLocalizedString("profile.setStatusN", comment: ""),
-            titleHighlighted: NSLocalizedString("profile.setStatusH", comment: ""),
+            titleHighlighted: NSLocalizedString("profile.setStatusH", comment: ""), titleColor: UIColor.createColor(lightMode: .white, darkMode: .lightGray),
             tapAction: { [weak self] in self?.tapMainButton() })
         button.layer.cornerRadius = 4
         button.layer.shadowOffset = CGSize(width: 4, height: 4)
         button.layer.shadowRadius = 4
-        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowColor = UIColor.createColor(lightMode: .black, darkMode: .systemGray4).cgColor
         button.layer.shadowOpacity = 0.7
         return button
     }()
@@ -62,9 +63,9 @@ class ProfileHeaderView: UIView {
         let status = UILabel()
         status.translatesAutoresizingMaskIntoConstraints = false
         status.font = UIFont.systemFont(ofSize: 14, weight: .regular)
-        status.textColor = UIColor.darkGray
+        status.textColor = UIColor.createColor(lightMode: .darkGray, darkMode: .systemGray3)
         status.text = "Waiting for something....."
-        status.backgroundColor = UIColor(displayP3Red: 0.0, green: 0.0, blue: 0.0, alpha: 0.0)
+//        status.backgroundColor = UIColor(displayP3Red: 0.0, green: 0.0, blue: 0.0, alpha: 0.0)
         return status
     }()
     
@@ -76,11 +77,11 @@ class ProfileHeaderView: UIView {
         status.adjustsFontSizeToFitWidth = true         ///уменьшение шрифта, если введенный текст не помещается
         status.minimumFontSize = 10                     ///до какого значения уменьшается шрифт
         status.tag = 3
-        status.backgroundColor = .white
+        status.backgroundColor = UIColor.createColor(lightMode: .white, darkMode: .systemGray4)
         status.layer.cornerRadius = 12
         status.layer.borderWidth = 1
-        status.layer.borderColor = UIColor.black.cgColor
-        status.tintColor = UIColor.AccentColor.normal                          ///цвет курсора
+        status.layer.borderColor = UIColor.createColor(lightMode: .black, darkMode: .systemGray3).cgColor
+        status.tintColor = UIColor.createColor(lightMode: .AccentColor.normal, darkMode: .AccentColor.normal)                         ///цвет курсора
         status.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0) ///сдвиг курсора на 5пт в textField (для красоты)
         status.addTarget(self, action: #selector(beginToEditStatus), for: .allEditingEvents)
         status.addTarget(self, action: #selector(changeStatusText), for: .editingChanged)
@@ -90,7 +91,7 @@ class ProfileHeaderView: UIView {
     
     private lazy var statusAlert: UILabel = {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.textColor = .systemRed
+        $0.textColor = UIColor.createColor(lightMode: .systemRed, darkMode: .systemRed)
         $0.font = UIFont.systemFont(ofSize: 13, weight: .light)
         return $0
     }(UILabel())
@@ -100,7 +101,7 @@ class ProfileHeaderView: UIView {
             tapAction: { [weak self] in self?.tapAcceptStatusButton() })
         button.layer.cornerRadius = 9
         button.setImage(UIImage(systemName: "checkmark.rectangle.portrait"), for: .normal)
-        button.tintColor = .white
+        button.tintColor = UIColor.createColor(lightMode: .white, darkMode: .lightGray)
         button.isHidden = true
         return button
     }()
@@ -109,9 +110,9 @@ class ProfileHeaderView: UIView {
     private lazy var buttonX: UIButton = {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.layer.cornerRadius = 12
-        $0.backgroundColor = UIColor.AccentColor.normal
+        $0.backgroundColor = UIColor.createColor(lightMode: .AccentColor.normal, darkMode: .AccentColor.normal)
         $0.setImage(UIImage(systemName: "x.circle"), for: .normal)
-        $0.tintColor = .white
+        $0.tintColor = UIColor.createColor(lightMode: .white, darkMode: .systemGray)
         $0.alpha = 0.0
         $0.isHidden = true
         $0.addTarget(self, action: #selector(tapButtonX), for: .touchUpInside)
@@ -122,7 +123,7 @@ class ProfileHeaderView: UIView {
     private lazy var yodaPhrase: UILabel = {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.text = "ЖИ-ШИ ПИШИ С БУКВОЙ И..."
-        $0.textColor = .yellow
+        $0.textColor = UIColor.createColor(lightMode: .yellow, darkMode: .systemYellow)
         $0.font = UIFont(name: "AppleSDGothicNeo-SemiBold", size: 22)
         $0.alpha = 0.0
         return $0
@@ -131,7 +132,7 @@ class ProfileHeaderView: UIView {
     private lazy var yodaTimer: UILabel = {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.text = ""
-        $0.textColor = .yellow
+        $0.textColor = UIColor.createColor(lightMode: .yellow, darkMode: .systemYellow)
         $0.font = UIFont(name: "AppleSDGothicNeo-SemiBold", size: 40)
         $0.alpha = 0.0
         return $0
