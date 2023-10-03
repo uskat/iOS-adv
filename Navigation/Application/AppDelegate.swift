@@ -13,7 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         let center = UNUserNotificationCenter.current()
         center.delegate = self
-        center.requestAuthorization(options: [.alert, .sound]) { result, error in
+        center.requestAuthorization(options: [.alert, .badge, .sound]) { result, error in
             if result {
                 print("✳️Request of authorization from Notification Center confirmed. Result = \(result)")
                 DispatchQueue.main.async {

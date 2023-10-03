@@ -17,12 +17,12 @@ class LocalNotificationsService {
         let content = UNMutableNotificationContent()
         content.title = "notification.checkUpdate".localized
         content.body = "..."
-        content.badge = (UIApplication.shared.applicationIconBadgeNumber + 1) as NSNumber
+        content.badge = 1
         content.sound = .defaultRingtone
         
         var components = DateComponents()
         components.hour = 12
-        components.minute = 17
+        components.minute = 47
         components.second = 00
         
         let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: true)
