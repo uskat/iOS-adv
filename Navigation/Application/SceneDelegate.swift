@@ -21,17 +21,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, UIApplicationDelegate {
 
         window = UIWindow(windowScene: windowScene)
         window?.rootViewController = showStartLogo()
-        
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4), execute: {
             self.window?.rootViewController = coordinators.start() //tabbar
         })
         
         window?.makeKeyAndVisible()
     }
-    
-//    func auth() {
-//
-//    }
     
     func showStartLogo() -> UIViewController {
         let vc = StartViewController()

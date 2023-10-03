@@ -3,12 +3,28 @@ import UIKit
 import FirebaseCore
 import FirebaseAuth
 import FirebaseFirestore
+import UserNotifications
 
 @main
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        let center = UNUserNotificationCenter.current()
+        center.delegate = self
+        center.requestAuthorization(options: [.alert, .sound]) { result, error in
+            if result {
+                print("✳️Request of authorization from Notification Center confirmed. Result = \(result)")
+                DispatchQueue.main.async {
+                    let localNotificationsService = LocalNotificationsService()
+                    localNotificationsService.registeForLatestUpdatesIfPossible()
+                }
+            } else {
+                print("🆘Request of authorization from Notification Center failed")
+            }
+        }
+        
         FirebaseApp.configure()
 //        let db = Firestore.firestore()
         return true

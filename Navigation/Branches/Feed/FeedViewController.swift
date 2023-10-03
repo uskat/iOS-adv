@@ -13,7 +13,7 @@ class FeedViewController: UIViewController {
     private lazy var headline: UILabel = {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.font = UIFont.systemFont(ofSize: 20, weight: .regular)
-        $0.text = NSLocalizedString("feed.inputPassLabel", comment: "")
+        $0.text = "feed.inputPassLabel".localized
         $0.adjustsFontSizeToFitWidth = true
         return $0
     }(UILabel())
@@ -21,7 +21,7 @@ class FeedViewController: UIViewController {
     private lazy var guessTextField: UITextField = {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.font = UIFont.systemFont(ofSize: 15, weight: .regular)
-        $0.placeholder = NSLocalizedString("feed.inputPassPlaceholder", comment: "")
+        $0.placeholder = "feed.inputPassPlaceholder".localized
         $0.adjustsFontSizeToFitWidth = true         ///уменьшение шрифта, если введенный текст не помещается
         $0.minimumFontSize = 10                     ///до какого значения уменьшается шрифт
         $0.backgroundColor = .white
@@ -34,8 +34,8 @@ class FeedViewController: UIViewController {
     
     private lazy var checkGuessButton: CustomButton = {
         let button = CustomButton(
-            title: NSLocalizedString("feed.toGuessButtonN", comment: ""),
-            titleHighlighted: NSLocalizedString("feed.toGuessButtonH", comment: ""),
+            title: "feed.toGuessButtonN".localized,
+            titleHighlighted: "feed.toGuessButtonH".localized,
             titleHighlightedColor: .lightGray,
             tapAction:  { [weak self] in
                             let feedModel = FeedModel()
@@ -60,8 +60,8 @@ class FeedViewController: UIViewController {
     
     private lazy var feedButton0: CustomButton = {
         let button = CustomButton(
-            title: NSLocalizedString("feed.toInfoVCButtonN", comment: ""),
-            titleHighlighted: NSLocalizedString("feed.toInfoVCButtonH", comment: ""),
+            title: "feed.toInfoVCButtonN".localized,
+            titleHighlighted: "feed.toInfoVCButtonH".localized,
             titleColor: .yellow,
             titleHighlightedColor: .lightGray,
             tapAction: { [weak self] in self?.tapFeedButton0() })
@@ -70,8 +70,8 @@ class FeedViewController: UIViewController {
     
     private lazy var feedButton1: CustomButton = {
         let button = CustomButton(
-            title: NSLocalizedString("feed.toListOfVideoN", comment: ""),
-            titleHighlighted: NSLocalizedString("feed.toListOfVideoH", comment: ""),
+            title: "feed.toListOfVideoN".localized,
+            titleHighlighted: "feed.toListOfVideoH".localized,
             titleColor: .green,
             titleHighlightedColor: .lightGray,
             tapAction: { [weak self] in self?.tapFeedButton1() })
@@ -80,8 +80,8 @@ class FeedViewController: UIViewController {
     
     private lazy var feedButton2: CustomButton = {
         let button = CustomButton(
-            title: NSLocalizedString("feed.toVideoPlayerButtonN", comment: ""),
-            titleHighlighted: NSLocalizedString("feed.toVideoPlayerButtonN", comment: ""),
+            title: "feed.toVideoPlayerButtonN".localized,
+            titleHighlighted: "feed.toVideoPlayerButtonN".localized,
             titleColor: .green,
             titleHighlightedColor: .lightGray,
             tapAction: { [weak self] in self?.tapFeedButton2() })
@@ -90,8 +90,8 @@ class FeedViewController: UIViewController {
     
     private lazy var feedButton3: CustomButton = {
         let button = CustomButton(
-            title: NSLocalizedString("feed.toMapButtonN", comment: ""),
-            titleHighlighted: NSLocalizedString("feed.toMapButtonN", comment: ""),
+            title: "feed.toMapButtonN".localized,
+            titleHighlighted: "feed.toMapButtonN".localized,
             titleColor: .red,
             titleHighlightedColor: .lightGray,
             tapAction: { [weak self] in self?.tapFeedButton3() })
