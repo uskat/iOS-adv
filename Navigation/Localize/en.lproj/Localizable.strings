@@ -44,3 +44,6 @@
 "profile.photos" = "Photos";
 "profile.setStatusN" = "Set status";
 "profile.setStatusH" = "Status is being recorded";
+
+"notification.checkUpdate" = "Check out the latest updates";
+"notification.activated" = "Notification Center successfully activated";

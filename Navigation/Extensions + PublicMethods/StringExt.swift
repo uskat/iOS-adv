@@ -21,3 +21,9 @@ extension String {
         return image
     }
 }
+
+extension String {
+    var localized: String {
+        NSLocalizedString(self, comment: self)
+    }
+}

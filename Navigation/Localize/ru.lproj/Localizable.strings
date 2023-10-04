@@ -44,3 +44,6 @@
 "profile.photos" = "Фотографии";
 "profile.setStatusN" = "Установить статус";
 "profile.setStatusH" = "Статус установлен";
+
+"notification.checkUpdate" = "Посмотрите последние обновления";
+"notification.activated" = "Notification Center был успешно активирован";

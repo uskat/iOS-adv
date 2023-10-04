@@ -54,6 +54,7 @@
 		B61025DC2A83377B00CB1461 /* FavoritesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61025DB2A83377B00CB1461 /* FavoritesTableViewCell.swift */; };
 		B61025E02A845CE000CB1461 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61025DF2A845CE000CB1461 /* Post.swift */; };
 		B61025E22A846D0000CB1461 /* CoreDataPostsManipulation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61025E12A846D0000CB1461 /* CoreDataPostsManipulation.swift */; };
+		B634287F2ACB8D0C0007BC7B /* LocalNotificationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B634287E2ACB8D0C0007BC7B /* LocalNotificationsService.swift */; };
 		B648D26C29EE161500FDE722 /* ProfileCoordiantor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B648D26B29EE161400FDE722 /* ProfileCoordiantor.swift */; };
 		B69758BF2A30B65300279646 /* BruteForce.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69758BE2A30B65300279646 /* BruteForce.swift */; };
 		B69758C22A375CB500279646 /* YouTubeiOSPlayerHelper in Frameworks */ = {isa = PBXBuildFile; productRef = B69758C12A375CB500279646 /* YouTubeiOSPlayerHelper */; };
@@ -172,6 +173,7 @@
 		B61025DB2A83377B00CB1461 /* FavoritesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesTableViewCell.swift; sourceTree = "<group>"; };
 		B61025DF2A845CE000CB1461 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		B61025E12A846D0000CB1461 /* CoreDataPostsManipulation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataPostsManipulation.swift; sourceTree = "<group>"; };
+		B634287E2ACB8D0C0007BC7B /* LocalNotificationsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationsService.swift; sourceTree = "<group>"; };
 		B648D26B29EE161400FDE722 /* ProfileCoordiantor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordiantor.swift; sourceTree = "<group>"; };
 		B69758BE2A30B65300279646 /* BruteForce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BruteForce.swift; sourceTree = "<group>"; };
 		B69758C42A375D3400279646 /* GoT.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = GoT.mp4; sourceTree = "<group>"; };
@@ -366,9 +368,10 @@
 			children = (
 				B6F447BB2A62145A00AB7E57 /* GoogleService-Info.plist */,
 				08F0949F2825E957003DA7CC /* Info.plist */,
+				0860055529512B4800B0C954 /* Application */,
+				B634287D2ACB8CEF0007BC7B /* Services */,
 				B62AED642AC6188E0079C625 /* Localize */,
 				B69758C32A375D1100279646 /* Resources */,
-				0860055529512B4800B0C954 /* Application */,
 				B6F4477D2A52262D00AB7E57 /* Network */,
 				B61025D52A82753800CB1461 /* CoreData */,
 				B6EE121129DC8BF100AA7FFD /* Model */,
@@ -405,6 +408,14 @@
 				B69F5D572AC64D0900EED8C1 /* InfoPlist.strings */,
 			);
 			path = Localize;
+			sourceTree = "<group>";
+		};
+		B634287D2ACB8CEF0007BC7B /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				B634287E2ACB8D0C0007BC7B /* LocalNotificationsService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		B69758C32A375D1100279646 /* Resources */ = {
@@ -690,6 +701,7 @@
 				0836A5BD283AEFDC007E62A4 /* Photos.swift in Sources */,
 				088D472C28F8C46B0073F086 /* LoginFactory.swift in Sources */,
 				08600557295130AC00B0C954 /* Coordinators.swift in Sources */,
+				B634287F2ACB8D0C0007BC7B /* LocalNotificationsService.swift in Sources */,
 				B6B92F722A6CBE4B0054805A /* UserService.swift in Sources */,
 				B6B92F6C2A6B388D0054805A /* FirestoreManager.swift in Sources */,
 				B6F840502A26A58800E48B07 /* StringExt.swift in Sources */,

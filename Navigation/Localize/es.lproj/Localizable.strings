@@ -44,3 +44,6 @@
 "profile.photos" = "Fotos";
 "profile.setStatusN" = "Establecer estado";
 "profile.setStatusH" = "Se está registrando el estado";
+
+"notification.checkUpdate" = "Consultar las últimas actualizaciones";
+"notification.activated" = "El Centro de notificaciones se activó correctamente";
