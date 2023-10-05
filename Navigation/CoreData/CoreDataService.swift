@@ -59,7 +59,7 @@ final class CoreDataService {
         let storeName = name + ".sqlite" // CoreDataNavigation.sqlite
         let documentsDirectoryUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first //
         let persistentStoreUrl = documentsDirectoryUrl?.appendingPathComponent(storeName) //сохраняем базу данных PersistentStore в директории Документы пользователя
-        print("✅", persistentStoreUrl)
+        print("✅", persistentStoreUrl ?? "")
         
         guard let persistentStoreUrl = persistentStoreUrl else { return }
         

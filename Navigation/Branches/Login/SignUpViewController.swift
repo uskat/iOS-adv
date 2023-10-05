@@ -102,7 +102,7 @@ class SignUpViewController: UIViewController {
         button.layer.cornerRadius = 10
         button.layer.shadowOffset = CGSize(width: 4, height: 4)
         button.layer.shadowRadius = 4
-        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowColor = UIColor.createColor(lightMode: .black, darkMode: .lightGray).cgColor
         button.layer.shadowOpacity = 0.7
         return button
     }()
@@ -206,7 +206,9 @@ class SignUpViewController: UIViewController {
                         self.alertOfSignUp(title: "You have registered successfully",
                                            message: "To log in, enter your email and password.",
                                            refreshTag: true)
-                        print("✅ registration was successful. Dump = \(dump(user))")
+                        let keychainService = KeychainService.shared
+                        keychainService.saveLogin(fromField: login)
+                        print("✅ registration was successful. Dump = \(dump(user)), login = \(login)")
                     case .failure(let error):
                         self.alertOfSignUp(title: "Registration failed",
                                            message: "\(error)")

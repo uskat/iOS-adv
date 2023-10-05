@@ -29,18 +29,18 @@ struct NetworkManager {
         
     static func request(for url: String) {
         guard let url = URL(string: url) else { return }
-        let urlSession = URLSession(configuration: URLSessionConfiguration.default)
+//        let urlSession = URLSession(configuration: URLSessionConfiguration.default)
         let dataTask = URLSession.shared.dataTask(with: url) { data, response, error in
 //            print("data:")
 //            print("-----------------")
             if let data = data {
-                if let string = String(data: data, encoding: .utf8) {
+//                if let string = String(data: data, encoding: .utf8) {
 //                    print("\(string)")
-                }
+//                }
             }
 //            print("=================")
 //            print("response")
-            if let response = response as? HTTPURLResponse {
+//            if let response = response as? HTTPURLResponse {
 //                print("   .allHeaderFields:")
 //                print("-----------------")
 //                print("   \(response.allHeaderFields)")
@@ -48,7 +48,7 @@ struct NetworkManager {
 //                print("   .statusCode:")
 //                print("-----------------")
 //                print("   \(response.statusCode)")
-            }
+//            }
 //            print("=================")
 //            print("error:")
 //            print("-----------------")

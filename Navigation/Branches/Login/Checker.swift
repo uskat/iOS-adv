@@ -14,7 +14,8 @@ final class Checker {
                 print("✅ authorization was successful. Dump = \(dump(user))")
                 userService.user = user
             case .failure(let error):
-                print("🚫 authorization failed. Dump = \(dump(error))")
+                userService.user = nil
+                print("🚫 authorization failed. Dump = \(dump(error)), user = \(String(describing: userService.user))")
             }
         })
     }

@@ -26,3 +26,9 @@ struct UserModel {
         self.login = user.email ?? ""
     }
 }
+
+//Keychain for biometrics
+struct Credentials {
+    var pass: String
+    var service = "user credentials"
+}

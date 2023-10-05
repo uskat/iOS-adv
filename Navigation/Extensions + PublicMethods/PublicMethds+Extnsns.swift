@@ -14,7 +14,7 @@ func placeHolder(_ textField: UITextField) -> String {
     }
 }
     
-public func checkInputedData(_ textField: UITextField, _ alert: UILabel) {
+public func checkInputedData(_ statusEntry: inout Bool, _ textField: UITextField, _ alert: UILabel) {
     var lengthFrom = 0
     var lengthTo = 0
     var message = ""
@@ -34,15 +34,17 @@ public func checkInputedData(_ textField: UITextField, _ alert: UILabel) {
         switch count {
         case 0:                     shakeMeBaby(textField)
                                     changeTextFieldColorAndText(textField, placeHolder(textField))
-                                    checkStatus(false)
+                                    statusEntry = false
+//                                    checkStatus(false)
         case lengthFrom..<lengthTo: if textField.tag == 3 {
                                         print("Сообщение об ошибке для строки profileStatus не выводим!")
                                     } else {
                                         shakeMeBaby(textField)
                                         alertMessageOnTextField(alert, message)
-                                        checkStatus(false)
+                                        statusEntry = false
+//                                        checkStatus(false)
                                     }
-        case lengthTo...:           checkStatus(true)
+        case lengthTo...:           ()
         default:                    break
         }
     }
@@ -81,7 +83,7 @@ private func shakeMeBaby(_ shakedItem: UITextField) {
     shakedItem.layer.add(shake, forKey: "position")
 }
 
-private func checkStatus(_ status: Bool) {
-    let viewModel = ProfileViewModel()
-    viewModel.statusEntry = viewModel.statusEntry ? status : false
-}
+//private func checkStatus(_ status: Bool) {
+//    let viewModel = ProfileViewModel()
+//    viewModel.statusEntry = viewModel.statusEntry ? status : false
+//}
