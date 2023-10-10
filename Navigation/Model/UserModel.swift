@@ -2,22 +2,7 @@
 import UIKit
 import FirebaseAuth
 
-//class UserModel {
-//    var login: String
-//    var password: String
-//    var name: String
-//    var avatar: UIImage
-//    var status: String
-//
-//    init(login: String = "", password: String = "", name: String = "", avatar: UIImage = UIImage(), status: String = "") {
-//        self.login = login
-//        self.password = password
-//        self.name = name
-//        self.avatar = avatar
-//        self.status = status
-//    }
-//}
-
+//Firebase
 struct UserModel {
 
     var login: String
@@ -25,4 +10,11 @@ struct UserModel {
     init(from user: User) {
         self.login = user.email ?? ""
     }
+}
+
+//Keychain for biometrics
+struct Credentials {
+    var login: String
+    var pass: String
+    var service = "user credentials"
 }

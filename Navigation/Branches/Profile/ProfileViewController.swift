@@ -16,6 +16,8 @@ class ProfileViewController: UIViewController {
 
     var userService = CurrentUserService.shared
     let viewModel: ProfileViewModel
+    private let userDefaults = UserDefaults.standard
+    private lazy var bioButton = UIBarButtonItem()
     private let profileHeaderView = ProfileHeaderView()
     private let profileTVCell = ProfileTableViewCell()
     private let detailedPostVC = DetailedPostViewController()
@@ -46,6 +48,7 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         showBarButton()
+        bioButtonStatus()
         if let userData = userService.userData {
             profileHeaderView.profileImage.image = UIImage(named: "yoda")
             profileHeaderView.profileLabel.text = userData.name
@@ -76,7 +79,12 @@ class ProfileViewController: UIViewController {
             target: self,
             action: #selector(logOutAction))
         button.tintColor = .red
-        navigationItem.rightBarButtonItem = button
+        bioButton = UIBarButtonItem(
+            image: UIImage(systemName: "faceid"),
+            style: .plain,
+            target: self,
+            action: #selector(bioButtonAction))
+        navigationItem.rightBarButtonItems = [button, bioButton]
     }
     
     @objc private func logOutAction() {
@@ -86,6 +94,29 @@ class ProfileViewController: UIViewController {
         } catch {
             print("log out failed")
         }
+    }
+    
+    @objc private func bioButtonAction() {
+        let keychainService = KeychainService.shared
+
+        if userDefaults.bool(forKey: "isPassExist") {
+            do {
+                try keychainService.deleteDataFromKeychain()
+            } catch (let error) {
+                print("‼️ Unable to delete login and pass from Keychain. Error = \(error.localizedDescription)")
+            }
+        } else {
+            do {
+                try keychainService.saveToKeichain()
+            } catch (let error) {
+                print("‼️ Unable to save login and pass to Keychain. Error = \(error.localizedDescription)")
+            }
+        }
+        bioButtonStatus()
+    }
+    
+    private func bioButtonStatus() {
+        bioButton.tintColor = userDefaults.bool(forKey: "isPassExist") ? .systemBlue : .systemRed
     }
 
     private func setupUI() {

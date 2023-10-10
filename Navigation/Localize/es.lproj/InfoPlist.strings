@@ -8,3 +8,4 @@
 
 "NSLocationWhenInUseUsageDescription" = "Permiso solicitado. Esta aplicación necesita su ubicación actual";
 "NSLocationUsageDescription" = "Permiso solicitado. Esta aplicación necesita su ubicación actual";
+"NSFaceIDUsageDescription" = "Esta aplicación utiliza FaceID para una autenticación segura";

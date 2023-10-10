@@ -5,18 +5,21 @@ final class Checker {
     static let shared = Checker()
     private init() {}
     
-    func signIn(login: String, pass: String) {
+    func signIn(login: String, pass: String, completion: @escaping (Bool) -> Void) {
         let firebaseService = FirebaseService.shared
         let userService = CurrentUserService.shared
-        firebaseService.signIn(withEmail: login, withPass: pass, completion: { result in
+        firebaseService.signIn(withEmail: login, withPass: pass) { result in
             switch result {
             case .success(let user):
-                print("✅ authorization was successful. Dump = \(dump(user))")
                 userService.user = user
+                print("✅ authorization was successful. Dump = \(dump(user))")
+                completion(true)
             case .failure(let error):
-                print("🚫 authorization failed. Dump = \(dump(error))")
+                userService.user = nil
+                print("🚫 authorization failed. Dump = \(dump(error)), user = \(String(describing: userService.user))")
+                completion(false)
             }
-        })
+        }
     }
     
     func signUp(login: String, pass: String) {

@@ -5,6 +5,7 @@ import FirebaseAuth
 class SignUpViewController: UIViewController {
 
     private let viewModel = ProfileViewModel()
+    var loginDelegate: LoginVCDelegate?
     private let notification = NotificationCenter.default ///уведомление для того чтобы отслеживать перекрытие клавиатурой UITextField
 
 //MARK: - ITEMs
@@ -80,7 +81,7 @@ class SignUpViewController: UIViewController {
         return $0
     }(UILabel())
 
-    private lazy var nameTextField: UITextField = {
+    private var nameTextField: UITextField = {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         $0.layer.borderColor = UIColor.lightGray.cgColor
@@ -102,7 +103,7 @@ class SignUpViewController: UIViewController {
         button.layer.cornerRadius = 10
         button.layer.shadowOffset = CGSize(width: 4, height: 4)
         button.layer.shadowRadius = 4
-        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowColor = UIColor.createColor(lightMode: .black, darkMode: .lightGray).cgColor
         button.layer.shadowOpacity = 0.7
         return button
     }()
@@ -151,7 +152,7 @@ class SignUpViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         loginTextField.animate(newText: placeHolder(loginTextField), characterDelay: 0.2)
         passTextField.animate(newText: placeHolder(passTextField), characterDelay: 0.2)
-        nameTextField.animate(newText: placeHolder(nameTextField), characterDelay: 0.2)
+//        nameTextField.animate(newText: placeHolder(nameTextField), characterDelay: 0.2)
     }
     
 //MARK: - METHODs
@@ -193,22 +194,21 @@ class SignUpViewController: UIViewController {
         
         if reasonCount == 0 {
             if let login = loginTextField.text, let pass = passTextField.text, let name = nameTextField.text {
-                viewModel.firebaseService.signUp(withEmail: login, withPass: pass, completion: { result in
+                viewModel.firebaseService.signUp(withEmail: login, withPass: pass, completion: { [weak self] result in
                     let userService = CurrentUserService.shared
                     switch result {
                     case .success(let user):
-                        userService.addUserData(to: user.login, name: name, status: "Hello, my padawan!")
-                        do {
-                            try self.viewModel.firebaseService.signOut()
-                        } catch {
-                            print("")
+                        userService.addUserData(to: user.login, name: name, status: "Hello, my padawan!") { addResult in
+                            switch addResult {
+                            case true:
+                                self?.loginDelegate?.authAndLoadDataFromFirestore(login, pass)
+                                print("✅ registration was successful. Dump = \(dump(user)), login = \(login)")
+                            case false: ()
+                            }
                         }
-                        self.alertOfSignUp(title: "You have registered successfully",
-                                           message: "To log in, enter your email and password.",
-                                           refreshTag: true)
-                        print("✅ registration was successful. Dump = \(dump(user))")
+
                     case .failure(let error):
-                        self.alertOfSignUp(title: "Registration failed",
+                        self?.alertOfSignUp(title: "Registration failed",
                                            message: "\(error)")
                         print("⛔️ registration failed, cause = \(error)")
                     }

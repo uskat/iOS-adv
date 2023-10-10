@@ -10,6 +10,7 @@ class ProfileHeaderView: UIView {
     private var widthProfileImage = NSLayoutConstraint()
     private var heightProfileImage = NSLayoutConstraint()
     
+    private var statusEntry = true //кстл
     private var statusText = "Waiting for something....."
     private let space: CGFloat = 16
     var timer: Timer?
@@ -54,7 +55,7 @@ class ProfileHeaderView: UIView {
         button.layer.cornerRadius = 4
         button.layer.shadowOffset = CGSize(width: 4, height: 4)
         button.layer.shadowRadius = 4
-        button.layer.shadowColor = UIColor.createColor(lightMode: .black, darkMode: .systemGray4).cgColor
+        button.layer.shadowColor = UIColor.createColor(lightMode: .black, darkMode: .lightGray).cgColor
         button.layer.shadowOpacity = 0.7
         return button
     }()
@@ -178,7 +179,7 @@ class ProfileHeaderView: UIView {
     }
     
     @objc private func tapMainButton() {
-        checkInputedData(editStatus, statusAlert)
+        checkInputedData(&statusEntry, editStatus, statusAlert)
         profileStatus.text = statusText
         editStatus.text = ""
         endEditing(true)
@@ -212,7 +213,7 @@ class ProfileHeaderView: UIView {
 //    }
     
     @objc private func tapAcceptStatusButton() {
-        checkInputedData(editStatus, statusAlert)
+        checkInputedData(&statusEntry, editStatus, statusAlert)
         endEditing(true)
         profileStatus.text = statusText
         editStatus.text = ""

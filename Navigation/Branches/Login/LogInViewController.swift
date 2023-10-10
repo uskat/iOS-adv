@@ -2,11 +2,17 @@
 import UIKit
 import FirebaseAuth
 
-class LogInViewController: UIViewController {
+protocol LoginVCDelegate: AnyObject {
+    func authAndLoadDataFromFirestore(_ login: String, _ pass: String)
+}
 
+class LogInViewController: UIViewController, LoginVCDelegate {
+
+    private var statusEntry = true
     private let viewModel: ProfileViewModel
     private let firestoreManager = FirestoreManager.shared
 //    let bruteForce = BruteForce()
+    private let userDefaults = UserDefaults.standard
     let userService = CurrentUserService.shared
     var loginDelegate: LoginViewControllerDelegate?
     private let notification = NotificationCenter.default ///уведомление для того чтобы отслеживать перекрытие клавиатурой UITextField
@@ -100,7 +106,7 @@ class LogInViewController: UIViewController {
         button.layer.cornerRadius = 10
         button.layer.shadowOffset = CGSize(width: 4, height: 4)
         button.layer.shadowRadius = 4
-        button.layer.shadowColor = UIColor.createColor(lightMode: .black, darkMode: .black).cgColor
+        button.layer.shadowColor = UIColor.createColor(lightMode: .black, darkMode: .lightGray).cgColor
         button.layer.shadowOpacity = 0.7
         return button
     }()
@@ -110,13 +116,30 @@ class LogInViewController: UIViewController {
             title: NSLocalizedString("signup", comment: ""),
             titleColor: UIColor.createColor(lightMode: .AccentColor.normal, darkMode: .AccentColor.normal),
             background: UIColor.createColor(lightMode: .systemGray6, darkMode: .systemGray6),
+            isTextAdjusted: true,
             tapAction:  { [weak self] in self?.tapSignUpButton() })
         button.layer.cornerRadius = 10
         button.layer.borderColor = UIColor.createColor(lightMode: .AccentColor.normal, darkMode: .AccentColor.normal).cgColor
         button.layer.borderWidth = 1
         button.layer.shadowOffset = CGSize(width: 4, height: 4)
         button.layer.shadowRadius = 4
-        button.layer.shadowColor = UIColor.createColor(lightMode: .black, darkMode: .black).cgColor
+        button.layer.shadowColor = UIColor.createColor(lightMode: .black, darkMode: .lightGray).cgColor
+        button.layer.shadowOpacity = 0.7
+        return button
+    }()
+    
+    private lazy var signInWithBioButton: CustomButton = {
+        let button = CustomButton(
+            background: UIColor.createColor(lightMode: .AccentColor.normal, darkMode: .AccentColor.normal),
+            tapAction:  { [weak self] in self?.tapSignUpWithBioButton() })
+        button.setImage(UIImage(systemName: "faceid"), for: .normal)
+        button.tintColor = UIColor.createColor(lightMode: .white, darkMode: .white)
+        button.layer.cornerRadius = 10
+        button.layer.borderColor = UIColor.createColor(lightMode: .AccentColor.normal, darkMode: .AccentColor.normal).cgColor
+        button.layer.borderWidth = 1
+        button.layer.shadowOffset = CGSize(width: 4, height: 4)
+        button.layer.shadowRadius = 4
+        button.layer.shadowColor = UIColor.createColor(lightMode: .black, darkMode: .systemGray).cgColor
         button.layer.shadowOpacity = 0.7
         return button
     }()
@@ -153,6 +176,7 @@ class LogInViewController: UIViewController {
         view.backgroundColor = UIColor.createColor(lightMode: .white, darkMode: .black)
         showLoginItems()
         view.addTapGestureToHideKeyboard() ///скрываем клавиатуру при нажатии вне поля textField
+        signInWithBioButton.isEnabled = userDefaults.bool(forKey: isPassExist) ? true : false
         #if DEBUG
             loginTextField.text = "22@ru.ru"
             passTextField.text = "222222"
@@ -209,9 +233,9 @@ class LogInViewController: UIViewController {
     }
         
     private func tapLoginButton() {
-        viewModel.statusEntry = true
+        statusEntry = true
         
-        checkInputedData(loginTextField, loginAlert)
+        checkInputedData(&statusEntry, loginTextField, loginAlert)
         UIView.animate(withDuration: 4.5, delay: 0.0, options: .curveEaseOut) { [self] in
             errorsLabel.text = validateEmail(loginTextField)
             errorsLabel.alpha = 1.0
@@ -224,38 +248,61 @@ class LogInViewController: UIViewController {
             } completion: { _ in  }
         }
         
-        checkInputedData(passTextField, passAlert)
-        
-        if viewModel.statusEntry {
-            if let login = loginTextField.text, let pass = passTextField.text {
-                activitySign.startAnimating()
-                loginDelegate?.signIn(login: login, pass: pass)
+        checkInputedData(&statusEntry, passTextField, passAlert)
+        if statusEntry {
+            guard let login = loginTextField.text, loginTextField.text != "" else { return }
+            guard let pass = passTextField.text, passTextField.text != "" else { return }
+
+            authAndLoadDataFromFirestore(login, pass)
+        }
+    }
+    
+    internal func authAndLoadDataFromFirestore(_ login: String, _ pass: String) {
+        activitySign.startAnimating()
+        loginDelegate?.signIn(login: login, pass: pass, completion: { signInResult in
+            if self.userService.user != nil {
                 
-                DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
-                    if let user = self.userService.user {
-                        self.userService.getUserData(from: user.login)
-                        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
+                switch signInResult {
+                case true:
+                    self.userService.getUserData(from: login) { firestoreResult in
+                        
+                        switch firestoreResult {
+                        case true:
                             self.activitySign.stopAnimating()
                             if self.userService.userData != nil {
+                                let keychainService = KeychainService.shared
+                                keychainService.credentials = Credentials(login: login, pass: pass)
                                 self.viewModel.load(to: .profile)
                             } else {
+                                self.activitySign.stopAnimating()
                                 self.alertOfLogIn(title: "Error",
                                                   message: "Connection failed. Check your connection and try again later.")
                                 try? self.viewModel.firebaseService.signOut()
                             }
-                        })
-                    } else {
-                        self.alertOfLogIn(title: "Incorrect login or password",
-                                          message: "Please, check inputed data.")
+                            
+                        case false:
+                            print("🚫LoginVC. Unable to restore data from Firestore")
+                            self.activitySign.stopAnimating()
+                            try? self.viewModel.firebaseService.signOut()
+                        }
+                        
                     }
-                })
+                case false:
+                    print("🚫LoginVC. Unable to sign in")
+                }
+                    
+            } else {
+                self.activitySign.stopAnimating()
+                self.alertOfLogIn(title: "Incorrect login or password",
+                                  message: "Please, check inputed data.")
             }
-        }
+        })
     }
 
     private func tapSignUpButton() {
         print("sign up tapped")
         let vc = SignUpViewController()
+        vc.loginDelegate = self
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -269,6 +316,38 @@ class LogInViewController: UIViewController {
         }
         alert.addAction(cancel)
         present(alert, animated: true)
+    }
+    
+    private func tapSignUpWithBioButton() {
+        let localAuthorizationService = LocalAuthorizationService()
+        localAuthorizationService.authorizeIfPossible { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case true:
+                    self?.activitySign.startAnimating()
+                    let keychainService = KeychainService.shared
+                    do {
+                        try keychainService.getLogin { result in
+                            switch result {
+                            case .success(let credentials):
+                                self?.activitySign.stopAnimating()
+                                self?.authAndLoadDataFromFirestore(credentials.login, credentials.pass)
+                            case .failure(let error):
+                                self?.activitySign.stopAnimating()
+                                self?.alertOfLogIn(title: "🚫Error",
+                                                   message: "Authorization failed. Can not retrieve login or pass from Keychain")
+                                print("can't retrieve login or pass. Error = \(error)")
+                            }
+                        }
+                    } catch (let error) {
+                        print("⛔️Unable to restore login or pass from Keychain. Error = \(error.localizedDescription)")
+                    }
+                case false:
+                    self?.alertOfLogIn(title: "❌Error",
+                                      message: "Authorization failed. Please complete your biometric settings")
+                }
+            }
+        }
     }
     
     private func validateEmail(_ textField: UITextField) -> String {
@@ -288,7 +367,7 @@ class LogInViewController: UIViewController {
         }
         return listOfErrorsToScreen
     }
-        
+    
     private func showLoginItems() {
         view.addSubview(scrollLoginView)
         
@@ -309,7 +388,7 @@ class LogInViewController: UIViewController {
             contentView.widthAnchor.constraint(equalTo: scrollLoginView.widthAnchor)
         ])
         
-        [logoItem, loginStack, activitySign, loginButton, signUpButton, errorsLabel].forEach({ contentView.addSubview($0) })
+        [logoItem, loginStack, activitySign, signInWithBioButton, loginButton, signUpButton, errorsLabel].forEach({ contentView.addSubview($0) })
         loginView.addSubview(loginTextField)
         [loginView, passTextField].forEach({ loginStack.addArrangedSubview($0) })
         [loginAlert, passAlert].forEach({ contentView.addSubview($0) })
@@ -333,9 +412,14 @@ class LogInViewController: UIViewController {
             activitySign.topAnchor.constraint(equalTo: logoItem.bottomAnchor, constant: 20),
             activitySign.centerXAnchor.constraint(equalTo: logoItem.centerXAnchor),
 
+            signInWithBioButton.topAnchor.constraint(equalTo: loginStack.bottomAnchor, constant: 16),
+            signInWithBioButton.leadingAnchor.constraint(equalTo: contentView.centerXAnchor, constant: 16),
+            signInWithBioButton.widthAnchor.constraint(equalToConstant: 50),
+            signInWithBioButton.heightAnchor.constraint(equalToConstant: 50),
+            
             loginButton.topAnchor.constraint(equalTo: loginStack.bottomAnchor, constant: 16),
             loginButton.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            loginButton.trailingAnchor.constraint(equalTo: logoItem.trailingAnchor),
+            loginButton.trailingAnchor.constraint(equalTo: signInWithBioButton.leadingAnchor, constant: -16),
             loginButton.heightAnchor.constraint(equalToConstant: 50),
             //loginButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16),
             
@@ -353,7 +437,7 @@ class LogInViewController: UIViewController {
             passAlert.widthAnchor.constraint(equalToConstant: 220),
             
             signUpButton.topAnchor.constraint(equalTo: loginButton.topAnchor),
-            signUpButton.leadingAnchor.constraint(equalTo: logoItem.trailingAnchor, constant: 16),
+            signUpButton.leadingAnchor.constraint(equalTo: signInWithBioButton.trailingAnchor, constant: 16),
             signUpButton.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -16),
             signUpButton.heightAnchor.constraint(equalToConstant: 50),
         ])
