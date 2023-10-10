@@ -17,7 +17,7 @@ class FirestoreManager {
     
     private init() {}
     
-    func setData(to login: String, name: String, status: String) {
+    func setData(to login: String, name: String, status: String, completion: @escaping (Bool) -> Void) {
         // Add a second document with a generated ID.
         var ref: DocumentReference? = nil
         ref = profilesCollection.addDocument(data: [
@@ -27,8 +27,10 @@ class FirestoreManager {
         ]) { error in
             if let error = error {
                 print("🚫Error adding document: \(dump(error))")
+                completion(false)
             } else {
                 print("✅Document added with ID: \(ref!.documentID)")
+                completion(true)
             }
         }
     }

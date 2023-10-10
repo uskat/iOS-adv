@@ -58,3 +58,7 @@ public var absoluteWidth: CGFloat {
     return  UIScreen.main.bounds.height < UIScreen.main.bounds.width ?
             UIScreen.main.bounds.height : UIScreen.main.bounds.width
 }
+
+
+//UserDeafaults Key
+public var isPassExist = "isPassExist"

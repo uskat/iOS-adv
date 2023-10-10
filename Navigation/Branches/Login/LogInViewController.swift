@@ -2,12 +2,17 @@
 import UIKit
 import FirebaseAuth
 
-class LogInViewController: UIViewController {
+protocol LoginVCDelegate: AnyObject {
+    func authAndLoadDataFromFirestore(_ login: String, _ pass: String)
+}
+
+class LogInViewController: UIViewController, LoginVCDelegate {
 
     private var statusEntry = true
     private let viewModel: ProfileViewModel
     private let firestoreManager = FirestoreManager.shared
 //    let bruteForce = BruteForce()
+    private let userDefaults = UserDefaults.standard
     let userService = CurrentUserService.shared
     var loginDelegate: LoginViewControllerDelegate?
     private let notification = NotificationCenter.default ///уведомление для того чтобы отслеживать перекрытие клавиатурой UITextField
@@ -111,6 +116,7 @@ class LogInViewController: UIViewController {
             title: NSLocalizedString("signup", comment: ""),
             titleColor: UIColor.createColor(lightMode: .AccentColor.normal, darkMode: .AccentColor.normal),
             background: UIColor.createColor(lightMode: .systemGray6, darkMode: .systemGray6),
+            isTextAdjusted: true,
             tapAction:  { [weak self] in self?.tapSignUpButton() })
         button.layer.cornerRadius = 10
         button.layer.borderColor = UIColor.createColor(lightMode: .AccentColor.normal, darkMode: .AccentColor.normal).cgColor
@@ -170,6 +176,7 @@ class LogInViewController: UIViewController {
         view.backgroundColor = UIColor.createColor(lightMode: .white, darkMode: .black)
         showLoginItems()
         view.addTapGestureToHideKeyboard() ///скрываем клавиатуру при нажатии вне поля textField
+        signInWithBioButton.isEnabled = userDefaults.bool(forKey: isPassExist) ? true : false
         #if DEBUG
             loginTextField.text = "22@ru.ru"
             passTextField.text = "222222"
@@ -246,30 +253,48 @@ class LogInViewController: UIViewController {
             guard let login = loginTextField.text, loginTextField.text != "" else { return }
             guard let pass = passTextField.text, passTextField.text != "" else { return }
 
-            activitySign.startAnimating()
-            loginDelegate?.signIn(login: login, pass: pass)
-            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3), execute: {
-                if let user = self.userService.user {
-                    self.loadUserDataFromFirestore(user.login)
-                } else {
-                    self.activitySign.stopAnimating()
-                    self.alertOfLogIn(title: "Incorrect login or password",
-                                      message: "Please, check inputed data.")
-                }
-            })
+            authAndLoadDataFromFirestore(login, pass)
         }
     }
     
-    private func loadUserDataFromFirestore(_ login: String, isEnterWithBio: Bool = false) {
-        self.userService.getUserData(from: login)
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4), execute: {
-            self.activitySign.stopAnimating()
-            if self.userService.userData != nil || isEnterWithBio {
-                self.viewModel.load(to: .profile)
+    internal func authAndLoadDataFromFirestore(_ login: String, _ pass: String) {
+        activitySign.startAnimating()
+        loginDelegate?.signIn(login: login, pass: pass, completion: { signInResult in
+            if self.userService.user != nil {
+                
+                switch signInResult {
+                case true:
+                    self.userService.getUserData(from: login) { firestoreResult in
+                        
+                        switch firestoreResult {
+                        case true:
+                            self.activitySign.stopAnimating()
+                            if self.userService.userData != nil {
+                                let keychainService = KeychainService.shared
+                                keychainService.credentials = Credentials(login: login, pass: pass)
+                                self.viewModel.load(to: .profile)
+                            } else {
+                                self.activitySign.stopAnimating()
+                                self.alertOfLogIn(title: "Error",
+                                                  message: "Connection failed. Check your connection and try again later.")
+                                try? self.viewModel.firebaseService.signOut()
+                            }
+                            
+                        case false:
+                            print("🚫LoginVC. Unable to restore data from Firestore")
+                            self.activitySign.stopAnimating()
+                            try? self.viewModel.firebaseService.signOut()
+                        }
+                        
+                    }
+                case false:
+                    print("🚫LoginVC. Unable to sign in")
+                }
+                    
             } else {
-                self.alertOfLogIn(title: "Error",
-                                  message: "Connection failed. Check your connection and try again later.")
-                try? self.viewModel.firebaseService.signOut()
+                self.activitySign.stopAnimating()
+                self.alertOfLogIn(title: "Incorrect login or password",
+                                  message: "Please, check inputed data.")
             }
         })
     }
@@ -277,6 +302,7 @@ class LogInViewController: UIViewController {
     private func tapSignUpButton() {
         print("sign up tapped")
         let vc = SignUpViewController()
+        vc.loginDelegate = self
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -294,22 +320,30 @@ class LogInViewController: UIViewController {
     
     private func tapSignUpWithBioButton() {
         let localAuthorizationService = LocalAuthorizationService()
-        localAuthorizationService.authorizeIfPossible { result in
+        localAuthorizationService.authorizeIfPossible { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case true:
-                    self.activitySign.startAnimating()
+                    self?.activitySign.startAnimating()
                     let keychainService = KeychainService.shared
-                    keychainService.getLogin { result in
-                        switch result {
-                        case .success(let login):
-                            self.loadUserDataFromFirestore(login, isEnterWithBio: true)
-                        case .failure(let error):
-                            print("can't retrieve login. Error = \(error)")
+                    do {
+                        try keychainService.getLogin { result in
+                            switch result {
+                            case .success(let credentials):
+                                self?.activitySign.stopAnimating()
+                                self?.authAndLoadDataFromFirestore(credentials.login, credentials.pass)
+                            case .failure(let error):
+                                self?.activitySign.stopAnimating()
+                                self?.alertOfLogIn(title: "🚫Error",
+                                                   message: "Authorization failed. Can not retrieve login or pass from Keychain")
+                                print("can't retrieve login or pass. Error = \(error)")
+                            }
                         }
+                    } catch (let error) {
+                        print("⛔️Unable to restore login or pass from Keychain. Error = \(error.localizedDescription)")
                     }
                 case false:
-                    self.alertOfLogIn(title: "Error",
+                    self?.alertOfLogIn(title: "❌Error",
                                       message: "Authorization failed. Please complete your biometric settings")
                 }
             }

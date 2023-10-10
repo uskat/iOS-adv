@@ -27,6 +27,9 @@ public func checkInputedData(_ statusEntry: inout Bool, _ textField: UITextField
             message = "Password must be at least 6 chars"
     case 3: lengthFrom = 1000
             lengthTo = 1000
+    case 4: lengthFrom = 1
+            lengthTo = 2
+            message = "Name must be at least 2 chars"
     default: print("status textField ?")
     }
     

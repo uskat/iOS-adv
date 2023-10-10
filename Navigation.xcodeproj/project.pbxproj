@@ -57,7 +57,7 @@
 		B634287F2ACB8D0C0007BC7B /* LocalNotificationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B634287E2ACB8D0C0007BC7B /* LocalNotificationsService.swift */; };
 		B63428812ACD07C60007BC7B /* LocalAuthorizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63428802ACD07C60007BC7B /* LocalAuthorizationService.swift */; };
 		B63428832ACDD28C0007BC7B /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63428822ACDD28C0007BC7B /* KeychainService.swift */; };
-		B63428852ACE4D7D0007BC7B /* AuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63428842ACE4D7D0007BC7B /* AuthError.swift */; };
+		B63428852ACE4D7D0007BC7B /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63428842ACE4D7D0007BC7B /* Errors.swift */; };
 		B648D26C29EE161500FDE722 /* ProfileCoordiantor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B648D26B29EE161400FDE722 /* ProfileCoordiantor.swift */; };
 		B69758BF2A30B65300279646 /* BruteForce.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69758BE2A30B65300279646 /* BruteForce.swift */; };
 		B69758C22A375CB500279646 /* YouTubeiOSPlayerHelper in Frameworks */ = {isa = PBXBuildFile; productRef = B69758C12A375CB500279646 /* YouTubeiOSPlayerHelper */; };
@@ -179,7 +179,7 @@
 		B634287E2ACB8D0C0007BC7B /* LocalNotificationsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationsService.swift; sourceTree = "<group>"; };
 		B63428802ACD07C60007BC7B /* LocalAuthorizationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorizationService.swift; sourceTree = "<group>"; };
 		B63428822ACDD28C0007BC7B /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
-		B63428842ACE4D7D0007BC7B /* AuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthError.swift; sourceTree = "<group>"; };
+		B63428842ACE4D7D0007BC7B /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		B648D26B29EE161400FDE722 /* ProfileCoordiantor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordiantor.swift; sourceTree = "<group>"; };
 		B69758BE2A30B65300279646 /* BruteForce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BruteForce.swift; sourceTree = "<group>"; };
 		B69758C42A375D3400279646 /* GoT.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = GoT.mp4; sourceTree = "<group>"; };
@@ -450,7 +450,7 @@
 		B6EE121129DC8BF100AA7FFD /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				B63428842ACE4D7D0007BC7B /* AuthError.swift */,
+				B63428842ACE4D7D0007BC7B /* Errors.swift */,
 				08504B15293D16420071FF5B /* FeedModel.swift */,
 				08AB23A728E79AF90062D209 /* UserModel.swift */,
 				B69758CA2A37940800279646 /* Videos.swift */,
@@ -739,7 +739,7 @@
 				0860055C29513BEE00B0C954 /* Branch.swift in Sources */,
 				0860055929513B0D00B0C954 /* FeedCoordinator.swift in Sources */,
 				B6F840162A1119E200E48B07 /* BranchesFactory.swift in Sources */,
-				B63428852ACE4D7D0007BC7B /* AuthError.swift in Sources */,
+				B63428852ACE4D7D0007BC7B /* Errors.swift in Sources */,
 				B6EE121829DC904800AA7FFD /* UILabelExt.swift in Sources */,
 				0811139E2842EC0800673E53 /* PublicMethds+Extnsns.swift in Sources */,
 				B6F4477F2A52265100AB7E57 /* NetworkManager.swift in Sources */,

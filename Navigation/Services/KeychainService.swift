@@ -10,60 +10,91 @@ import Security
 
 class KeychainService {
     
-    //UserDeafaults Key
-    private var isLoginExist = "isLoginExist"
-    
-    private var credentials = Credentials(pass: "")
+    var credentials = Credentials(login: "", pass: "")
     private let userDefaults = UserDefaults.standard
     static let shared = KeychainService()
 
     private init() {}
     
-    func getLogin(completion: @escaping (Result<String, AuthError>) -> Void)  {
+    func getLogin(completion: @escaping (Result<Credentials, AuthError>) -> Void) throws {
         let query = [
             kSecClass: kSecClassGenericPassword,
             kSecAttrService: credentials.service,
+            kSecMatchLimit: kSecMatchLimitOne,
+            kSecReturnAttributes: true,
             kSecReturnData: true
         ] as [CFString : Any] as CFDictionary
         
-        var extractedData: AnyObject?
-        let status = SecItemCopyMatching(query, &extractedData)
-        guard status == errSecItemNotFound || status == errSecSuccess else {            completion(.failure(.unableGetLogin(description: String(status))))
-            return
+        var item: AnyObject?
+        let status = SecItemCopyMatching(query, &item)
+        
+        guard status != errSecItemNotFound else {
+            completion(.failure(.passNotFound(description: String(status))))
+            throw KeychainError.noPassword
+        }
+        
+        guard status == errSecSuccess else {
+            completion(.failure(.unhandledError(description: String(status))))
+            throw KeychainError.unhandledError(status: status)
         }
 
-        guard status != errSecItemNotFound else {
-            completion(.failure(.loginNotFound(description: String(status))))
-            return
+        guard let existingItem = item as? [String: Any],
+              let passData = existingItem[kSecValueData as String] as? Data,
+              let pass = String(data: passData, encoding: .utf8),
+              let login = existingItem[kSecAttrAccount as String] as? String
+        else {
+            completion(.failure(.unableRetrievePass))
+            throw KeychainError.unexpectedPasswordData
         }
         
-        guard let loginData = extractedData as? Data,
-              let login = String(data: loginData, encoding: .utf8) else {
-            completion(.failure(.unableRetrieveLogin))
-            return
-        }
-        completion(.success(login))
+        credentials.login = login
+        credentials.pass = pass
+        completion(.success(credentials))
+        print("🟢 Login and pass successfully retreived from Keychain")
     }
     
-    func saveLogin(fromField login: String?) {
-        guard let loginData = login?.data(using: .utf8) else {
-            print("Unable to retrieve data from password")
+    func saveToKeichain() throws {
+        guard let credentialsPass = credentials.pass.data(using: .utf8) else {
+            print("Keychain. Unable to retrieve data from password")
             return
         }
         
-        let attributes = [
+        let query = [
             kSecClass: kSecClassGenericPassword,
-            kSecValueData: loginData,
+            kSecAttrAccount: credentials.login,
+            kSecValueData: credentialsPass,
             kSecAttrService: credentials.service
         ] as [CFString : Any] as CFDictionary
         
-        let status = SecItemAdd(attributes, nil)
+        let status = SecItemAdd(query, nil)
+        
         guard status == errSecDuplicateItem || status == errSecSuccess else {
-            print("Unable to add login. Error = \(status)")
-            userDefaults.set(false, forKey: isLoginExist)
-            return
+            print("Keychain. Unable to add login and pass. Error = \(status)")
+            userDefaults.set(false, forKey: isPassExist)
+            throw KeychainError.unhandledError(status: status)
         }
-        print("New login successfully added.")
-        userDefaults.set(true, forKey: isLoginExist)
+
+        print("🟢 New login and pass successfully added to Keychain.")
+        userDefaults.set(true, forKey: isPassExist)
+    }
+    
+    func deleteDataFromKeychain() throws {
+        let query = [
+            kSecClass: kSecClassGenericPassword,
+            kSecAttrAccount: credentials.login,
+            kSecAttrService: credentials.service,
+            kSecReturnData: false
+        ] as [CFString : Any] as CFDictionary
+        
+        let status = SecItemDelete(query)
+        
+        guard status == errSecItemNotFound || status == errSecSuccess else {
+            print("Keychain. Unable to delete login and pass. Error = \(status)")
+            userDefaults.set(false, forKey: isPassExist)
+            throw KeychainError.unhandledError(status: status)
+        }
+
+        print("🟢 Login and pass successfully deleted from Keychain.")
+        userDefaults.set(false, forKey: isPassExist)
     }
 }

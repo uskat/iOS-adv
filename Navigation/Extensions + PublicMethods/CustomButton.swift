@@ -21,12 +21,14 @@ class CustomButton: UIButton {
             }
         }
     }
-    
+
     var tapAction: (() -> Void)?
+    var isTextAdjusted: Bool?
     
     init(title: String = "", titleHighlighted: String? = nil,
          titleColor: UIColor = .white, titleHighlightedColor: UIColor? = nil,
          background: UIColor = .systemBlue,
+         isTextAdjusted: Bool = false,
          tapAction: (() -> Void)? = nil) {
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
@@ -37,11 +39,22 @@ class CustomButton: UIButton {
         setTitle(titleHighlighted ?? title, for: .highlighted)
         setTitleColor(titleColor, for: .normal)
         setTitleColor(titleHighlightedColor ?? titleColor, for: .highlighted)
+        self.isTextAdjusted = isTextAdjusted
         addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        guard let isTextAdjusted = isTextAdjusted else { return }
+        if isTextAdjusted {
+            titleLabel?.textAlignment = .center
+            titleLabel?.adjustsFontSizeToFitWidth = true
+            titleLabel?.frame = CGRect(x: 6, y: 0, width: bounds.width - 12, height: bounds.height)
+        }
     }
    
     @objc private func buttonTapped() {
